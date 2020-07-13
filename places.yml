@@ -1,0 +1,42 @@
+places:
+  Argentina:
+    tz: 'UTC-3'
+  Chile:
+    tz: 'UTC-4'
+  Colombia:
+    tz: 'UTC-5'
+  Ecuador:
+    tz: 'UTC-5'
+  Guatemala:
+    tz: 'UTC-6'
+  Mexico:
+    tz: 'UTC-5'
+  Panama:
+    tz: 'UTC-5'
+  Peru:
+    tz: 'UTC-5'
+  Puerto Rico:
+    tz: 'UTC-4'
+  Spain:
+    tz: 'UTC+2'
+  Venezuela:
+    tz: 'UTC-4'
+
+
+debug: true
+log_path: /tmp/tweetdeck-scraper.log
+interval: 900
+
+
+twitter_login_url: https://twitter.com/login?hide_message=true&redirect_after_login=https%3A%2F%2Ftweetdeck.twitter.com%2F%3Fvia_twitter_login%3Dtrue
+firefox_driver_path: './drivers/geckodriver'
+chrome_driver_path: './drivers/chromedriver'
+
+driver: chrome
+
+rmq_host: localhost
+rmq_port: 5672
+rmq_queue: tweetdeck
+
+mysql_host: localhost
+mysql_database: trends
