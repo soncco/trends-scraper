@@ -78,6 +78,7 @@ class Scraper:
         self.driver.get(settings()['twitter_login_url'])
 
         time.sleep(2)
+        self.driver.save_screenshot('login.png')
         username_field = self.driver.find_element_by_name('session[username_or_email]')
         password_field = self.driver.find_element_by_name('session[password]')
 
@@ -91,11 +92,13 @@ class Scraper:
         my_button.click()
 
         time.sleep(5)
+        self.driver.save_screenshot('after_login.png')
         try:
             challenge = self.driver.find_element_by_id('challenge_response')
             challenge.send_keys(settings()['twitter_mail'])
 
             time.sleep(1)
+            self.driver.save_screenshot('verification.png')
 
             button = self.driver.find_element_by_id('email_challenge_submit')
             button.click()
@@ -117,6 +120,7 @@ class Scraper:
 
     def scrape(self):
         time.sleep(5)
+        self.driver.save_screenshot('columns.png')
         
         try:
             element_present = EC.presence_of_element_located((By.CLASS_NAME, 'column'))
