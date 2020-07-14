@@ -191,7 +191,7 @@ class Scraper:
 
     def save(self, df):
         df.to_sql('trends', con=engine(), if_exists='append', index=False)
-        self.logger.info('Saved to db' % place)
+        self.logger.info('Saved to db')
 
     def run(self):
         self.login()
