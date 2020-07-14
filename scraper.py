@@ -93,6 +93,26 @@ class Scraper:
 
         time.sleep(5)
         self.driver.save_screenshot('after_login.png')
+
+        try:
+            time.sleep(2)
+            self.driver.save_screenshot('login-again.png')
+            username_field = self.driver.find_element_by_name('session[username_or_email]')
+            password_field = self.driver.find_element_by_name('session[password]')
+
+            username_field.send_keys(settings()['twitter_username'])
+            time.sleep(1)
+
+            password_field.send_keys(settings()['twitter_password'])
+            time.sleep(1)
+
+            my_button = self.driver.find_element_by_xpath("//div[@data-testid='LoginForm_Login_Button']")
+            my_button.click()
+
+            time.sleep(5)
+        except:
+            self.logger.info('No login again')
+
         try:
             challenge = self.driver.find_element_by_id('challenge_response')
             challenge.send_keys(settings()['twitter_mail'])
