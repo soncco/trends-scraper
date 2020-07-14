@@ -78,7 +78,8 @@ class Scraper:
         self.driver.get(settings()['twitter_login_url'])
 
         time.sleep(2)
-        self.driver.save_screenshot('login.png')
+        if settings()['screenshot']:
+            self.driver.save_screenshot('login.png')
         username_field = self.driver.find_element_by_name('session[username_or_email]')
         password_field = self.driver.find_element_by_name('session[password]')
 
@@ -92,11 +93,13 @@ class Scraper:
         my_button.click()
 
         time.sleep(5)
-        self.driver.save_screenshot('after_login.png')
+        if settings()['screenshot']:
+            self.driver.save_screenshot('after_login.png')
 
         try:
             time.sleep(2)
-            self.driver.save_screenshot('login-again.png')
+            if settings()['screenshot']:
+                self.driver.save_screenshot('login-again.png')
             username_field = self.driver.find_element_by_name('session[username_or_email]')
             password_field = self.driver.find_element_by_name('session[password]')
 
@@ -118,7 +121,8 @@ class Scraper:
             challenge.send_keys(settings()['twitter_mail'])
 
             time.sleep(1)
-            self.driver.save_screenshot('verification.png')
+            if settings()['screenshot']:
+                self.driver.save_screenshot('verification.png')
 
             button = self.driver.find_element_by_id('email_challenge_submit')
             button.click()
@@ -140,7 +144,8 @@ class Scraper:
 
     def scrape(self):
         time.sleep(5)
-        self.driver.save_screenshot('columns.png')
+        if settings()['screenshot']:
+            self.driver.save_screenshot('columns.png')
         
         try:
             element_present = EC.presence_of_element_located((By.CLASS_NAME, 'column'))
@@ -161,6 +166,8 @@ class Scraper:
                 columns=['location', 'hashtag', 'tweets_counter', 'position', 'trend_date'])
 
             place = clean_title(title_container.text)
+
+            self.logger.info(title_container.text)
             
             for key, trend in enumerate(trends):
                 uid = uuid.uuid4()
@@ -179,13 +186,12 @@ class Scraper:
 
                 self.enqueue(uid.hex)
 
+            self.logger.info('Saving %s to db' % place)
             self.save(df)
-            print(df)
-                
-            print('============\n\n')
 
     def save(self, df):
         df.to_sql('trends', con=engine(), if_exists='append', index=False)
+        self.logger.info('Saved to db' % place)
 
     def run(self):
         self.login()
