@@ -40,3 +40,5 @@ rmq_queue: tweetdeck
 
 mysql_host: localhost
 mysql_database: trends
+
+screenshots: false
