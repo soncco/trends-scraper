@@ -97,6 +97,15 @@ class Scraper:
             self.driver.save_screenshot('after_login.png')
 
         try:
+            login_button = self.driver.find_elements_by_class_name('Button--primary')
+            login_button.click()
+            time.sleep(4)
+            if settings()['screenshot']:
+                self.driver.save_screenshot('login_button.png')
+        except:
+            self.logger.info('No login button')
+
+        try:
             time.sleep(2)
             if settings()['screenshot']:
                 self.driver.save_screenshot('login-again.png')
