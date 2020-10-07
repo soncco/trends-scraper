@@ -1,4 +1,10 @@
-# Trends Scraper from tweetdeck
+# Trends Scraper from Tweetdeck
+
+A simple trend scrapper from Tweetdeck, based on the work of [Mateo Grella](https://github.com/matteo-grella/tweetdeck-scraper).
+
+## Why
+
+For research purposes only.
 
 ## Requirements
 
@@ -60,3 +66,12 @@ Create mysql database and table:
   # Run the script
   $ python scraper.py
   ```
+  
+## Legal
+It is your responsibility to ensure that your use of tweetdeck-scraper does not violate applicable laws.
+
+## License
+
+Tweetdeck Scraper is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/soncco/trends-scraper/blob/master/LICENSE) for the full
+license text.
